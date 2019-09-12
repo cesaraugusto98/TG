@@ -1,0 +1,2 @@
+pypdf2==1.26.0
+pymongo[srv]==3.9.0
