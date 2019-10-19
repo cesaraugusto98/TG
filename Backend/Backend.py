@@ -8,7 +8,6 @@ app = Flask(__name__)
 client = pymongo.MongoClient("mongodb+srv://admin:admin@quizfatec-xl7tb.mongodb.net/test?retryWrites=true&w=majority")
 dbProvas = client["QuizFATEC"]
 
-
 @app.route('/QuizFATEC/Provas',methods=['GET'])
 def get_all_questions():       
     colProvas = dbProvas["provas"]  
@@ -23,7 +22,7 @@ def get_one_question(id):
     colProvas = dbProvas["provas"]  
     q = colProvas.find_one({'_id': id})
     if q is None :
-        output = ''
+        output = 'a busca nao retornou resultados'
     else:
         output = {'texto': q['texto'], 'a': q['a'], 'b': q['b'], 'c': q['c'], 'd': q['d'], 'e': q['e'], 'reposta': q['resposta'], 'tema': q['tema']}
     
@@ -36,8 +35,11 @@ def get_random_by_theme(tema):
     for q in colProvas.find({'tema': tema}):
         lst.append({'texto': q['texto'], 'a': q['a'], 'b': q['b'], 'c': q['c'], 'd': q['d'], 'e': q['e'], 'reposta': q['resposta'], 'prova': q['prova'], 'numero':q['numero'], 'tema': q['tema']})
 
-    i = random.randint(1, len(lst))
-    output = lst[i]
+    i = random.randint(0, len(lst))
+    try:
+        output = lst[i]
+    except:
+        output = "A busca nao retornou resultados"  
 
     return jsonify({'resp' : output})
 #==================================================================================================================================================================================
@@ -49,12 +51,15 @@ def get_random():
     for q in colProvas.find():
         lst.append({'texto': q['texto'], 'a': q['a'], 'b': q['b'], 'c': q['c'], 'd': q['d'], 'e': q['e'], 'reposta': q['resposta'], 'prova': q['prova'], 'numero':q['numero'], 'tema': q['tema']})
 
-    i = random.randint(1, len(lst))
-    output = lst[i]
+    i = random.randint(0, len(lst))
+    try:
+        output = lst[i]
+    except:
+        output = "A busca nao retornou resultados"
     return jsonify({'resp' : output})
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Usuarios/', methods=['POST'])
-def add_authorized():
+def post_user():
     colUsuarios = dbProvas["usuarios"]  
     
     id = request.json['_id']
@@ -65,12 +70,12 @@ def add_authorized():
     if q is None :
         output = ''
     else:
-        output = {'_id': q['_id'], 'email': q['email']}
+        output = {'_id': q['_id'], 'email': q['email'], 'name':q['name'], 'nickname':q['nickname']}
 
     return jsonify({'resp' : output})
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Usuarios/Login', methods=['POST'])
-def get_authorized():
+def get_authenticated():
     colUsuarios = dbProvas["usuarios"] 
  
     id = request.json['_id']
@@ -82,7 +87,7 @@ def get_authorized():
     elif q['password'] != password:
         output = "Senha invalida, verifique a ortografia"
     else:
-        output = {'_id': q['_id'], 'email': q['email']}
+        output = {'_id': q['_id'], 'email': q['email'], 'name':q['name'], 'nickname':q['nickname']}
 
     return jsonify({'resp' : output})
 
