@@ -5,12 +5,12 @@
                 <form [formGroup]="form">
                     <br>
                     <p text-center>
-                        <img src="assets/icon/icon.png" alt="QuizFATEC" width="150">
+                        <img src="assets/icon/icon.ico" alt="QuizFATEC" width="150">
                     </p>
                     <br>
                     <ion-list lines="none" class="animated fadeIn">
                         <ion-item>
-                            <ion-input type="text" maxlength="20" placeholder="Usuário" formControlName="username" autocomplete="username" (keyup.enter)="submit()">
+                            <ion-input type="text" maxlength="20" placeholder="Usuário" formControlName="_id" autocomplete="username" (keyup.enter)="submit()">
                             </ion-input>
                         </ion-item>
                         <ion-item>
@@ -21,10 +21,10 @@
                         </ion-item>
                     </ion-list>
                     <br>
-                    <ion-button color="light" expand="full" size="large" class="animated fadeIn" [disabled]="!form.valid" (click)="submit()">
+                    <ion-button color="light" expand="full" size="large" class="animated bounceInDown" [disabled]="!form.valid" (click)="submit()">
                         Entrar
                     </ion-button>
-                    <ion-button color="light" fill="clear" expand="full" class="animated fadeIn" (click)="resetPassword()">ESQUECI MINHA SENHA
+                    <ion-button color="light" fill="clear" expand="full" class="animated bounceInDown" (click)="resetPassword()">ESQUECI MINHA SENHA
                     </ion-button>
                 </form>
             </ion-col>
