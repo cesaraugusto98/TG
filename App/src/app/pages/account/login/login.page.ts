@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/data.service';
 import { UserModel } from 'src/app/models/user.model';
+import { SecurityUtil } from 'src/utils/security.util';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,8 @@ export class LoginPage implements OnInit {
     private loadingCrtl: LoadingController,
     private toastCrtl: ToastController,
     private navCrtl: NavController,
-    private service: DataService  ,
-  ) { 
+    private service: DataService,
+  ) {
     this.form = this.fb.group({
       _id: ['', Validators.compose([
         Validators.required,
@@ -48,18 +49,26 @@ export class LoginPage implements OnInit {
       .getAuthenticated(this.form.value)
       .subscribe(
         (res: UserModel) => {
-          //SecurityUtil.set(res);
-          loading.dismiss();
-          this.navCrtl.navigateRoot('/');
+          console.log(res)
+          console.log(res._id)
+          console.log(res.password)
+          if (res._id!=undefined) {
+            this.showSucess(`Seja bem vindo ${res.nickname}!`)
+            SecurityUtil.set(res);
+            loading.dismiss();
+            this.navCrtl.navigateRoot('/');
+          }else{
+            this.showError('Usuário ou senha inválidos');
+            loading.dismiss();
+          }
         },
         (err) => {
-          console.log(err);
           this.showError('Usuário ou senha inválidos');
           loading.dismiss();
         });
   }
 
-  toggleHide(){
+  toggleHide() {
     this.hide = !this.hide;
   }
 
@@ -67,5 +76,10 @@ export class LoginPage implements OnInit {
     const error = await this.toastCrtl.create({ message: message, showCloseButton: true, closeButtonText: 'Fechar', duration: 3000 });
     error.present();
   }
-  
+
+  async showSucess(message) {
+    const success = await this.toastCrtl.create({ message: message, showCloseButton: true, closeButtonText: 'Fechar', duration: 3000 });
+    success.present();
+  }
+
 }
