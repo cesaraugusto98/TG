@@ -28,7 +28,7 @@ def get_one_question(id):
     else:
         output = {'texto': q['texto'], 'a': q['a'], 'b': q['b'], 'c': q['c'], 'd': q['d'], 'e': q['e'], 'reposta': q['resposta'], 'tema': q['tema']}
     
-    return jsonify({'resp' : output})
+    return jsonify(output)
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Provas/Temas/<tema>', methods=['GET'])
 def get_random_by_theme(tema):
@@ -43,7 +43,7 @@ def get_random_by_theme(tema):
     except:
         output = "A busca nao retornou resultados"  
 
-    return jsonify({'resp' : output})
+    return jsonify(output)
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Provas/Random/', methods=['GET'])
 
@@ -75,7 +75,7 @@ def post_user():
     else:
         output = {'_id': q['_id'], 'email': q['email'], 'name':q['name'], 'nickname':q['nickname']}
 
-    return jsonify({'resp' : output})
+    return jsonify(output)
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Usuarios/Login', methods=['POST'])
 def get_authenticated():
@@ -92,7 +92,7 @@ def get_authenticated():
     else:
         output = {'_id': q['_id'], 'email': q['email'], 'name':q['name'], 'nickname':q['nickname']}
 
-    return jsonify({'resp' : output})
+    return jsonify(output)
 
 if __name__ == '__main__':
     app.run(debug = True)
