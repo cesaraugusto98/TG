@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
+from flask_cors import CORS
 import pymongo
 import random
 
 app = Flask(__name__)
+CORS(app, resources=r'/QuizFATEC/*')
 
 client = pymongo.MongoClient("mongodb+srv://admin:admin@quizfatec-xl7tb.mongodb.net/test?retryWrites=true&w=majority")
 dbProvas = client["QuizFATEC"]
@@ -44,6 +46,7 @@ def get_random_by_theme(tema):
     return jsonify({'resp' : output})
 #==================================================================================================================================================================================
 @app.route('/QuizFATEC/Provas/Random/', methods=['GET'])
+
 def get_random():
     colProvas = dbProvas["provas"]  
     

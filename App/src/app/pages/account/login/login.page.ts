@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/data.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginPage implements OnInit {
     private service: DataService  ,
   ) { 
     this.form = this.fb.group({
-      username: ['', Validators.compose([
+      _id: ['', Validators.compose([
         Validators.required,
       ])],
       password: ['', Validators.compose([
@@ -35,8 +36,36 @@ export class LoginPage implements OnInit {
 
   }
 
+  async submit() {
+    if (this.form.invalid)
+      return;
+
+    const loading = await this.loadingCrtl.create({ message: 'Autenticando...' });
+    loading.present();
+
+    this
+      .service
+      .getAuthenticated(this.form.value)
+      .subscribe(
+        (res: UserModel) => {
+          //SecurityUtil.set(res);
+          loading.dismiss();
+          this.navCrtl.navigateRoot('/');
+        },
+        (err) => {
+          console.log(err);
+          this.showError('Usuário ou senha inválidos');
+          loading.dismiss();
+        });
+  }
+
   toggleHide(){
     this.hide = !this.hide;
   }
 
+  async showError(message) {
+    const error = await this.toastCrtl.create({ message: message, showCloseButton: true, closeButtonText: 'Fechar', duration: 3000 });
+    error.present();
+  }
+  
 }
