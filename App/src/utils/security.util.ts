@@ -4,12 +4,14 @@ export class SecurityUtil {
     public static set(user: UserModel) {
         const data = JSON.stringify(user);
         localStorage.setItem('student.data', btoa(data));
+        //localStorage.setItem('student.data', data);
     }
 
     public static get(): UserModel {
         const data = localStorage.getItem('student.data');
         if (data) {
             return JSON.parse(atob(data));
+            //return JSON.parse(data);
         } else {
             return null;
         }
