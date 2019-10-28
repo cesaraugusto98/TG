@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "39af8a3c-044a-4582-a13a-534784a62c88",
+		"name": "test backend QuizFATEC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Questão - Tema Aleatorio",
+			"protocolProfileBehavior": {
+				"maxRedirects": 15
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://61aa1e80.ngrok.io/QuizFATEC/Provas/Temas/BIOLOGIA",
+					"protocol": "http",
+					"host": [
+						"61aa1e80",
+						"ngrok",
+						"io"
+					],
+					"path": [
+						"QuizFATEC",
+						"Provas",
+						"Temas",
+						"BIOLOGIA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"_id\":\"admin\", \"password\":\"dasd\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://345362ce.ngrok.io/QuizFATEC/Usuarios/Login",
+					"protocol": "http",
+					"host": [
+						"345362ce",
+						"ngrok",
+						"io"
+					],
+					"path": [
+						"QuizFATEC",
+						"Usuarios",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insere Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"_id\":\"admin\", \"password\":\"admin\", \"name\":\"Administrador\",\"nickname\":\"ADM\",  \"email\":\"cesar.santos21@fatec.sp.gov.br\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://84a8dd33.ngrok.io/QuizFATEC/Usuarios/",
+					"protocol": "http",
+					"host": [
+						"84a8dd33",
+						"ngrok",
+						"io"
+					],
+					"path": [
+						"QuizFATEC",
+						"Usuarios",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

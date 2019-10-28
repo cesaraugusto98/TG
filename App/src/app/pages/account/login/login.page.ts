@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/service/data.service';
 import { UserModel } from 'src/app/models/user.model';
 import { SecurityUtil } from 'src/utils/security.util';
 
@@ -49,9 +49,6 @@ export class LoginPage implements OnInit {
       .getAuthenticated(this.form.value)
       .subscribe(
         (res: UserModel) => {
-          console.log(res)
-          console.log(res._id)
-          console.log(res.password)
           if (res._id!=undefined) {
             this.showSucess(`Seja bem vindo ${res.nickname}!`)
             SecurityUtil.set(res);
@@ -60,12 +57,25 @@ export class LoginPage implements OnInit {
           }else{
             this.showError('Usuário ou senha inválidos');
             loading.dismiss();
+            SecurityUtil.clear();
           }
         },
         (err) => {
           this.showError('Usuário ou senha inválidos');
           loading.dismiss();
+          SecurityUtil.clear();
         });
+  }
+
+  async resetPassword() {
+    if (this.form.controls['_id'].invalid) {
+      this.showError("Usuário inválido");
+      SecurityUtil.clear();
+      return;
+    }
+
+    const loading = await this.loadingCrtl.create({ message: 'Restaurando sua senha...' });
+    loading.present();
   }
 
   toggleHide() {

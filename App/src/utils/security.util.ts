@@ -1,4 +1,5 @@
 import { UserModel } from '../app/models/user.model';
+import { QuestionModel } from 'src/app/models/question.model';
 
 export class SecurityUtil {
     public static set(user: UserModel) {
@@ -8,6 +9,20 @@ export class SecurityUtil {
 
     public static get(): UserModel {
         const data = localStorage.getItem('student.data');
+        if (data) {
+            return JSON.parse(atob(data));
+        } else {
+            return null;
+        }
+    }
+    public static setQuestion(question: QuestionModel) {
+        const data = JSON.stringify(question);
+        localStorage.removeItem('student.question');
+        localStorage.setItem('student.question', btoa(data));
+    }
+
+    public static getQuestion(): QuestionModel {
+        const data = localStorage.getItem('student.question');
         if (data) {
             return JSON.parse(atob(data));
         } else {
@@ -37,6 +52,7 @@ export class SecurityUtil {
     }*/
 
     public static clear() {
-        localStorage.removeItem('shop.data');
+        localStorage.removeItem('student.data');
+        localStorage.removeItem('student.question')
     }
 }

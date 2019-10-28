@@ -6,13 +6,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
 
-  public baseUrl = "https://345362ce.ngrok.io/QuizFATEC";
+  public baseUrl = "http://61aa1e80.ngrok.io/QuizFATEC";
   //public baseUrl = "http://localhost:5000/QuizFATEC";
 
   constructor(private http: HttpClient) { }
 
   public getAuthenticated(data: any) {
-    console.log(data)
     return this.http.post(`${this.baseUrl}/Usuarios/Login`, data);
   }
 
@@ -30,6 +29,6 @@ export class DataService {
   
 
   public getRandomTheme(theme: string) {
-    return this.http.get(`${this.baseUrl}/Provas/Random/${theme}`);
+    return this.http.get(`${this.baseUrl}/Provas/Temas/${theme}`);
   }
 }
