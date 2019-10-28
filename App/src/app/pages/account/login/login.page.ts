@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/service/data.service';
 import { UserModel } from 'src/app/models/user.model';
 import { SecurityUtil } from 'src/utils/security.util';
 

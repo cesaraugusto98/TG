@@ -1,15 +1,14 @@
 export class QuestionModel {
     constructor(
-        public id: string,
         public prova: string,
-        public numeroQuestao: number,
+        public numero: number,
         public tema: string,
-        public questao: string,
-        public alternativaA: string,
-        public alternativaB: string,
-        public alternativaC: string,
-        public alternativaD: string,
-        public alternativaE: string,
+        public texto: string,
+        public a: string,
+        public b: string,
+        public c: string,
+        public d: string,
+        public e: string,
         public links: string[],
         public resposta: string,
     ) {

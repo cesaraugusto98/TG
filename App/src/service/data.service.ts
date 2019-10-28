@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
 
-  public baseUrl = "http://e98a10a9.ngrok.io/QuizFATEC";
+  public baseUrl = "http://61aa1e80.ngrok.io/QuizFATEC";
   //public baseUrl = "http://localhost:5000/QuizFATEC";
 
   constructor(private http: HttpClient) { }
@@ -29,6 +29,6 @@ export class DataService {
   
 
   public getRandomTheme(theme: string) {
-    return this.http.get(`${this.baseUrl}/Provas/Random/${theme}`);
+    return this.http.get(`${this.baseUrl}/Provas/Temas/${theme}`);
   }
 }
