@@ -18,13 +18,13 @@ export class SecurityUtil {
     public static setQuestion(question: QuestionModel) {
         const data = JSON.stringify(question);
         localStorage.removeItem('student.question');
-        localStorage.setItem('student.question', btoa(data));
+        localStorage.setItem('student.question', data);
     }
 
     public static getQuestion(): QuestionModel {
         const data = localStorage.getItem('student.question');
         if (data) {
-            return JSON.parse(atob(data));
+            return JSON.parse(data);
         } else {
             return null;
         }
@@ -53,6 +53,10 @@ export class SecurityUtil {
 
     public static clear() {
         localStorage.removeItem('student.data');
+        localStorage.removeItem('student.question')
+    }
+    
+    public static clearQuestion() {
         localStorage.removeItem('student.question')
     }
 }

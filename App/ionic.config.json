@@ -1,5 +1,7 @@
 {
-    "name": "QuizFATEC",
-    "integrations": {},
-    "type": "angular"
+  "name": "QuizFATEC",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
 }

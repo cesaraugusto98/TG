@@ -25,7 +25,11 @@ export class HomePage {
 
   ngOnInit() {
     this.user$ = SecurityUtil.get();
-    this.nickname = this.user$.nickname;
+    if(this.user$==null){
+      this.navCtrl.navigateRoot('/login');
+    }else{
+      this.nickname = this.user$.nickname;
+    } 
   }
 
   logout(){
@@ -34,10 +38,9 @@ export class HomePage {
   }
 
   searchMultidisciplinar(){
-    if(this.setQuestion('MULTIDISCIPLICAR')){
-      console.log("Verdadeiro");  
+    if(this.setQuestion('MULTIDISCIPLINAR')){
       this.navCtrl.navigateForward('/multidisciplinar');
-    }
+    }    
   }
 
   searchRacLogico(){
@@ -80,6 +83,8 @@ export class HomePage {
 
     const loading = await this.loadingCtrl.create({ message: 'Sorteando aleatoriamente sua questão aleatória...' });
     loading.present();
+    
+    SecurityUtil.clearQuestion();
 
      this
       .service

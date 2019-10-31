@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
             this.showSucess(`Seja bem vindo ${res.nickname}!`)
             SecurityUtil.set(res);
             loading.dismiss();
-            this.navCrtl.navigateRoot('/');
+            this.navCrtl.navigateRoot('/home');
           }else{
             this.showError('Usuário ou senha inválidos');
             loading.dismiss();

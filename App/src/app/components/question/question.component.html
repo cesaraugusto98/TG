@@ -1,9 +1,45 @@
 <p>
+    <ion-text>
+        <h3>Questão:
+            <h4>&nbsp; {{texto}}</h4>
+        </h3>
+    </ion-text>
+
+    <ion-text *ngIf="links?.length > 0">
+        <h3>links: {{links}}</h3>
+    </ion-text>
+
     <ion-list>
-
-        <ion-checkbox ng-model="filter.red">Red</ion-checkbox>
-        <ion-checkbox ng-model="filter.yellow">Yellow</ion-checkbox>
-        <ion-checkbox ng-model="filter.pink">Pink</ion-checkbox>
-
+        <ion-radio-group (ionChange)="radioGroupChange($event)">
+            <ion-item>
+                <ion-text>A) {{a}}</ion-text>
+                <ion-radio value="A"> a </ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-text>B) {{b}}</ion-text>
+                <ion-radio value="B"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-text>C) {{c}}</ion-text>
+                <ion-radio value="C"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-text>D) {{d}}</ion-text>
+                <ion-radio value="D"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-text>E) {{e}}</ion-text>
+                <ion-radio value="E"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
     </ion-list>
+
+    <ion-grid class="ion-text-center">
+        <ion-button color="primary" (click)="validateQuestion()">
+            Validar
+        </ion-button>
+        <ion-button color="danger" (click)="reportQuestion()">
+            Reportar
+        </ion-button>
+    </ion-grid>
 </p>
