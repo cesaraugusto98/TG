@@ -10,11 +10,23 @@
                     <br>
                     <ion-list lines="none" class="animated fadeIn">
                         <ion-item>
-                            <ion-input type="text" maxlength="20" placeholder="Usuário" formControlName="_id" autocomplete="username" (keyup.enter)="submit()">
+                            <ion-input type="text" maxlength="20" placeholder="Usuário" formControlName="_id" autocomplete="username">
                             </ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input [type]="hide ? 'password' : 'text'" placeholder="Senha" formControlName="password" autocomplete="password" (keyup.enter)="submit()">
+                            <ion-input type="text" maxlength="60" placeholder="Nome Completo" formControlName="name" autocomplete="name">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="text" maxlength="20" placeholder="Apelido" formControlName="nickname">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="text" maxlength="50" placeholder="E-mail" formControlName="email" autocomplete="name">
+                            </ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input [type]="hide ? 'password' : 'text'" placeholder="Senha" formControlName="password" autocomplete="password">
                             </ion-input>
                             <ion-icon color="light" class="clickable" [name]="hide ? 'eye' : 'eye-off'" (click)="toggleHide()">
                             </ion-icon>
@@ -22,9 +34,9 @@
                     </ion-list>
                     <br>
                     <ion-button color="light" expand="full" size="large" class="animated bounceInDown" [disabled]="!form.valid" (click)="submit()">
-                        Entrar
+                        Cadastrar
                     </ion-button>
-                    <ion-button color="light" fill="clear" expand="full" class="animated bounceInDown" (click)="createAccount()">ABRA SUA CONTA AQUI!
+                    <ion-button color="light" fill="clear" expand="full" class="animated bounceInDown" (click)="voltar()">Voltar
                     </ion-button>
                 </form>
             </ion-col>

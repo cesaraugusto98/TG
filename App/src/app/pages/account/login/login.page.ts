@@ -92,4 +92,8 @@ export class LoginPage implements OnInit {
     success.present();
   }
 
+  createAccount(){
+    this.navCrtl.navigateForward('/signup');
+  }
+
 }

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
 
-  public baseUrl =  "http://e35528bf.ngrok.io/QuizFATEC";
+  public baseUrl =  "http://23954b1b.ngrok.io/QuizFATEC";
   //public baseUrl = "http://localhost:5000/QuizFATEC";
 
   constructor(private http: HttpClient) { }
@@ -16,7 +16,7 @@ export class DataService {
   }
 
   public postUser(data: any) {
-    return this.http.post(`${this.baseUrl}/Usuarios/Login`, data);
+    return this.http.post(`${this.baseUrl}/Usuarios/`, data);
   }
 
   public getAllQuestions() {

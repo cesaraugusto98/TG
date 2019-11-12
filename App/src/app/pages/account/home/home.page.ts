@@ -44,39 +44,57 @@ export class HomePage {
   }
 
   searchRacLogico(){
-    this.setQuestion('RACIOCÍNIO LÓGICO'); 
+    if(this.setQuestion('RACIOCÍNIO LÓGICO')){
+      this.navCtrl.navigateForward('/raclogico');
+    } 
    }
 
    searchHistoria(){
-    this.setQuestion('HISTÓRIA'); 
+    if(this.setQuestion('HISTÓRIA')){
+      this.navCtrl.navigateForward('/historia');
+    } 
    }
 
    searchQuimica(){
-    this.setQuestion('QUÍMICA'); 
+     if(this.setQuestion('QUÍMICA')){
+       this.navCtrl.navigateForward('/quimica');
+     }
    }
 
    searchIngles(){
-    this.setQuestion('INGLÊS'); 
+     if(this.setQuestion('INGLÊS')){
+       this.navCtrl.navigateForward('/ingles');
+     } 
    }
 
    searchMatematica(){
-    this.setQuestion('MATEMÁTICA'); 
+    if(this.setQuestion('MATEMÁTICA')){
+      this.navCtrl.navigateForward('/matematica');
+    }
    }
 
    searchFisica(){
-    this.setQuestion('FÍSICA'); 
+    if(this.setQuestion('FÍSICA')){
+      this.navCtrl.navigateForward('/fisica');
+    }
    }
 
    searchGeografia(){
-    this.setQuestion('GEOGRAFIA'); 
+    if(this.setQuestion('GEOGRAFIA')){
+      this.navCtrl.navigateForward('geografia');
+    }
    }
 
    searchBiologia(){
-    this.setQuestion('BIOLOGIA'); 
+     if(this.setQuestion('BIOLOGIA')){
+       this.navCtrl.navigateForward('/biologia');
+     }
    }
 
    searchPortugues(){
-    this.setQuestion('PORTUGUÊS');
+    if(this.setQuestion('PORTUGUÊS')){
+      this.navCtrl.navigateForward('/portugues');
+    }
    }
 
    async setQuestion(theme: string){

@@ -1,45 +1,56 @@
 <p>
-    <ion-text>
-        <h3>Questão:
+    <ion-card-header>
+        <ion-text color="light">
             <h4>&nbsp; {{texto}}</h4>
-        </h3>
-    </ion-text>
+        </ion-text>
 
-    <ion-text *ngIf="links?.length > 0">
-        <h3>links: {{links}}</h3>
-    </ion-text>
 
-    <ion-list>
-        <ion-radio-group (ionChange)="radioGroupChange($event)">
-            <ion-item>
-                <ion-text>A) {{a}}</ion-text>
-                <ion-radio value="A"> a </ion-radio>
-            </ion-item>
-            <ion-item>
-                <ion-text>B) {{b}}</ion-text>
-                <ion-radio value="B"></ion-radio>
-            </ion-item>
-            <ion-item>
-                <ion-text>C) {{c}}</ion-text>
-                <ion-radio value="C"></ion-radio>
-            </ion-item>
-            <ion-item>
-                <ion-text>D) {{d}}</ion-text>
-                <ion-radio value="D"></ion-radio>
-            </ion-item>
-            <ion-item>
-                <ion-text>E) {{e}}</ion-text>
-                <ion-radio value="E"></ion-radio>
-            </ion-item>
-        </ion-radio-group>
-    </ion-list>
+        <ion-text color="primary" *ngIf="links?.length > 0">
+            <h4>Links para Consulta:</h4>
+            <div *ngFor="let link of links">
+                <a href="{{link}}">{{link}}</a>
+            </div>
 
-    <ion-grid class="ion-text-center">
-        <ion-button color="primary" (click)="validateQuestion()">
-            Validar
-        </ion-button>
-        <ion-button color="danger" (click)="reportQuestion()">
-            Reportar
-        </ion-button>
-    </ion-grid>
+        </ion-text>
+    </ion-card-header>
+    <ion-card>
+        <ion-list>
+            <ion-radio-group (ionChange)="radioGroupChange($event)">
+                <ion-item>
+                    <ion-text>A) {{a}}</ion-text>
+                    <ion-radio value="A"> a </ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-text>B) {{b}}</ion-text>
+                    <ion-radio value="B"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-text>C) {{c}}</ion-text>
+                    <ion-radio value="C"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-text>D) {{d}}</ion-text>
+                    <ion-radio value="D"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-text>E) {{e}}</ion-text>
+                    <ion-radio value="E"></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ion-list>
+
+        <ion-grid class="ion-text-center" *ngIf="!hide">
+            <ion-button color="primary" (click)="validateQuestion()">
+                Validar
+            </ion-button>
+            <ion-button color="danger" (click)="reportQuestion()">
+                Reportar
+            </ion-button>
+        </ion-grid>
+        <ion-grid class="ion-text-center" *ngIf="hide">
+            <ion-button color="danger" (click)="voltar()">
+                Voltar ao Menu
+            </ion-button>
+        </ion-grid>
+    </ion-card>
 </p>

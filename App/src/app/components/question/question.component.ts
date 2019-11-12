@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionModel } from 'src/app/models/question.model';
 import { SecurityUtil } from 'src/utils/security.util';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController, } from '@ionic/angular';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
 
 @Component({
   selector: 'app-question',
@@ -9,24 +11,22 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent implements OnInit {
-  public question: QuestionModel;
-  public prova: String;
-  public numero: Number;
+  public question: QuestionModel;  public prova: String; public numero: Number;
   public texto: String;
-  public a: String;
-  public b: String;
-  public c: String;
-  public d: String;
-  public e: String;
-  public repostaGabarito: String;
+  public a: String;  public b: String;  public c: String;  public d: String;  public e: String;  public repostaGabarito: String;
   public links: String[]; 
-  public respostaDada
+  public respostaDada;
+  public hide: boolean;
+  
   
   constructor(
     private navCtrl: NavController,
+    private toastCtrl: ToastController,
+    private emailComposer: EmailComposer,
   ) { }
 
   ngOnInit() {
+    this.hide = false;
     this.question = SecurityUtil.getQuestion();
     if(this.question==undefined){
       this.navCtrl.navigateBack('\home');
@@ -42,28 +42,56 @@ export class QuestionComponent implements OnInit {
       this.e=this.question.e;
       this.links=this.question.links;
       this.repostaGabarito = this.question.resposta;
-      console.log(this.repostaGabarito);
     }
   }
 
   validateQuestion(){
     if(this.respostaDada!=this.repostaGabarito){
-      console.log(this.respostaDada)
-      console.log(this.repostaGabarito)
-      console.log("errou")
+      this.showDialog("Você errou, leia com atenção as alternativas e tente novamente!", "danger");
     } else{
-      console.log(this.respostaDada)
-      console.log(this.repostaGabarito)
-      console.log("acertou")
-    }
-    
+      this.showDialog("Parabéns! Você acertou, continue focado nos estudos!", "success");
+      this.hide = !this.hide;
+    } 
   }
 
   reportQuestion(){
-    console.log("Deveria enviar um email")
+    this.sendEmail();
+    this.showDialog("Obrigado por reportar a questão, em breve retornaremos!", "medium");
+    this.hide = !this.hide;
+  }
+
+  voltar(){
+    this.navCtrl.navigateRoot("/home");
   }
 
   radioGroupChange(event){
-    this.respostaDada = event.detail;
+    this.respostaDada = event.detail.value;
+  }
+
+  async showDialog(message, color) {
+    const dialog = await this.toastCtrl.create({ message: message, showCloseButton: true, closeButtonText: 'Fechar', duration: 3000, color: color});
+    dialog.present();
+  }
+
+  sendEmail(){
+    this.emailComposer.isAvailable().then((available: boolean) =>{
+      if(available) {
+        
+      }
+      else{
+        this.showDialog("Não foi possivel enviar o email", "danger")
+      }
+     });
+     
+     let email = {
+      to: 'cesaraugusto.santos@outlook.com',
+      cc: '',
+      subject: "QuizFATEC - Questão "+ this.prova +"- Número: "+ String(this.numero) +" Reportada",
+      body: "Não foi possivel responder a questão, verificar a ausência de imagens, textos ou alternativas vazias.",
+      isHtml: true
+    }
+    
+    // Send a text message using default options
+    this.emailComposer.open(email);
   }
 }
