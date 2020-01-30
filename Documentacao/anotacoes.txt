@@ -1,0 +1,9 @@
+nao falar sobre a FATEC
+FALAR DE ETL Primeiro
+depois seguir com tecnicas de obtencao dos dados
+nao falar de jupyter notebook
+
+
+ENFASE NA FATEC NO CAPITULO 4
+buscar referencias mais fundamentas, focar em ETL
+
