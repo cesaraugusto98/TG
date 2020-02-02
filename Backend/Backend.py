@@ -34,7 +34,7 @@ def get_one_question(id):
 def get_random_by_theme(tema):
     colProvas = dbProvas["provas"]  
     lst = []
-    for q in colProvas.find({'tema': tema}):
+    for q in colProvas.find({'$and': [{'tema': tema}, {'valida': True}]}):
         try:
             lst.append({'texto': q['texto'], 'a': q['a'], 'b': q['b'], 'c': q['c'], 'd': q['d'], 'e': q['e'], 'resposta': q['resposta'], 'prova': q['prova'], 'numero':q['numero'], 'tema': q['tema'], 'links': q['links']})
         except:
