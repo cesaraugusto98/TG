@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
 
-  public baseUrl =  "http://root-kqtj.localhost.run/QuizFATEC";
+  public baseUrl =  "http://root-zo3x.localhost.run/QuizFATEC";
   //public baseUrl = "http://localhost:5000/QuizFATEC";
 
   constructor(private http: HttpClient) { }
